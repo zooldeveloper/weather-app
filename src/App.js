@@ -1,11 +1,13 @@
-/** @format */
 
-import './App.css';
+import TopButtons from './components/TopButtons';
+import Inputs from './components/Inputs';
+
 
 function App() {
      return (
-          <div className='App'>
-               
+          <div className='mx-auto my-3 p-5 md:px-20 max-w-3xl h-auto bg-gradient-to-br from-cyan-700 to-blue-700 text-white flex flex-col'>
+               <TopButtons />
+               <Inputs />
           </div>
      );
 }
