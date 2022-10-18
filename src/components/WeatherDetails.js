@@ -8,7 +8,12 @@ import {
      UilArrowDown
 } from '@iconscout/react-unicons';
 
-const WeatherDetails = () => {
+const WeatherDetails = ({ weatherDetails, iconCode }) => {
+     
+     const {
+          main, icon, temp, feels_like, humidity,
+          speed, sunrise, sunset, temp_max, temp_min
+     } = weatherDetails;
 
      const weather = [
           [
@@ -16,19 +21,19 @@ const WeatherDetails = () => {
                     id: 1,
                     icon: UilTemperature,
                     element: 'Real feel',
-                    unit: '19°'
+                    unit: `${feels_like}°`
                },
                {
                     id: 2,
                     icon: UilTear,
                     element: 'Humidity',
-                    unit: '35%'
+                    unit: `${humidity}%`
                },
                {
                     id: 3,
                     icon: UilWind,
                     element: 'Wind',
-                    unit: '4 km/h'
+                    unit: `${speed} km/h`
                }
           ],
           [
@@ -36,38 +41,37 @@ const WeatherDetails = () => {
                     id: 1,
                     icon: UilSun,
                     element: 'Rise',
-                    unit: '05:15 am°'
+                    unit: `${sunrise} AM`
                },
                {
                     id: 2,
                     icon: UilSunset,
                     element: 'Set',
-                    unit: '07:45 pm'
+                    unit: `${sunset} AM`
                },
                {
                     id: 3,
                     icon: UilArrowUp,
                     element: 'Hight',
-                    unit: '19°'
+                    unit: `${temp_max}°`
                },
                {
                     id: 4,
                     icon: UilArrowDown,
                     element: 'Low',
-                    unit: '17°'
+                    unit: `${temp_min}°`
                },
           ]
      ]
 
-
+     // console.log(iconCode(icon))
 
      return (
           <div>
-               <p className='text-center my-4 text-cyan-200'>Clear</p>
+               <p className='text-center my-4 text-cyan-200'>{ main }</p>
                <div className='flex justify-between items-center'>
-                    {/* <img src={} alt='clear sky' /> */}
-                    <UilSun size='50' />
-                    <h3 className='text-3xl font-medium'>14°</h3>
+                    <img src={iconCode(icon)} alt='clear sky' />
+                    <h3 className='text-3xl font-medium'>{ temp }°</h3>
                     <div className='grid gap-y-2'>
                          {weather[0].map(weather => {
                               return (

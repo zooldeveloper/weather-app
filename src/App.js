@@ -12,13 +12,13 @@ function App() {
      const [query, setQuery] = useState({ q: 'paris' });
      const [unit, setUnit] = useState('matric');
      const [timeAndLocation, setTimeAndLocation] = useState({});
-     const [weather, setWeather] = useState(null);
+     const [weather, setWeather] = useState({});
      
      useEffect(() => {
           const fetchWeatherData = async () => {
 
                const data = await getFormatedWeatherData({...query, units: unit });
-               
+               // console.log(data)
                setTimeAndLocation({
                     timezone: formatToLocalTime(data.dt, data.timezone),
                     location: `${data.name}, ${data.country}`
@@ -45,7 +45,10 @@ function App() {
                     setUnit={setUnit}
                />
                <TimeAndLocation timeAndLocation={timeAndLocation} />
-               <WeatherDetails />
+               <WeatherDetails
+                    weatherDetails={weather}
+                    iconCode={getIconCode}
+               />
                <Forecast title='HOURLY FORECAST' />
                <Forecast title='DAILY FORECAST'/>
           </div>
