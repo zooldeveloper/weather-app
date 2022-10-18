@@ -1,4 +1,4 @@
-const TopButtons = () => {
+const TopButtons = ({ handleStaticValue }) => {
 
      const cities = [
           {
@@ -28,7 +28,10 @@ const TopButtons = () => {
      return (
           <div className='w-full flex justify-around font-medium'>
                {cities.map(city => (
-                    <button key={city.id}>{city.name}</button>
+                    <button
+                         onClick={() => handleStaticValue(city.name)}
+                         key={city.id}>{city.name}
+                    </button>
                ))}
           </div>
      )
