@@ -3,9 +3,6 @@ import { DateTime } from 'luxon';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = 'YOUR_API_KEY';
 
-// You can use weathr your own api key or the appid query value below to fetch the forecast data!
-// https://api.openweathermap.org/data/2.5/onecall?lat=47.1667&lon=-1.5833&exclude=current,minutely,hourly,alerts&appid=1fa9ff4126d95b8db54f3897a208e91c&units=metric
-
 const getWeatherData = (serviceType, searchParams) => {
      const url = new URL(BASE_URL + '/' + serviceType);
      url.search = new URLSearchParams({...searchParams, appid:API_KEY});
@@ -65,9 +62,9 @@ const getFormatedWeatherData = async (searchParams) => {
 const formatToLocalTime = (
      secs,
      zone,
-     format = "ccc, dd, mm, yyyy | Local time: 'hh:mm a"
+     format = "cccc, LLLL, dd, yyyy' | Local time: 'hh:mm a"
 ) => {
-     DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
+     return DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
 };
 
 const getIconCode = (code) => {

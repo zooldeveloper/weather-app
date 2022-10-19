@@ -10,7 +10,7 @@ import { formatToLocalTime, getIconCode } from './services/weatherService';
 function App() {
 
      const [query, setQuery] = useState({ q: 'paris' });
-     const [unit, setUnit] = useState('matric');
+     const [unit, setUnit] = useState('metric');
      const [timeAndLocation, setTimeAndLocation] = useState({});
      const [weather, setWeather] = useState({});
      
@@ -18,7 +18,6 @@ function App() {
           const fetchWeatherData = async () => {
 
                const data = await getFormatedWeatherData({...query, units: unit });
-               // console.log(data)
                setTimeAndLocation({
                     timezone: formatToLocalTime(data.dt, data.timezone),
                     location: `${data.name}, ${data.country}`
@@ -47,10 +46,19 @@ function App() {
                <TimeAndLocation timeAndLocation={timeAndLocation} />
                <WeatherDetails
                     weatherDetails={weather}
+                    toLocalTime={formatToLocalTime}
                     iconCode={getIconCode}
                />
-               <Forecast title='HOURLY FORECAST' />
-               <Forecast title='DAILY FORECAST'/>
+               <Forecast
+                    title='HOURLY FORECAST'
+                    forecast={weather.hourly}
+                    iconCode={getIconCode}
+               />
+               <Forecast
+                    title='DAILY FORECAST'
+                    forecast={weather.daily}
+                    iconCode={getIconCode}
+               />
           </div>
      )
 }

@@ -8,11 +8,12 @@ import {
      UilArrowDown
 } from '@iconscout/react-unicons';
 
-const WeatherDetails = ({ weatherDetails, iconCode }) => {
+const WeatherDetails = ({ weatherDetails, toLocalTime, iconCode }) => {
      
      const {
-          main, icon, temp, feels_like, humidity,
-          speed, sunrise, sunset, temp_max, temp_min
+          main, icon, temp, feels_like,
+          humidity, speed, sunrise, sunset,
+          temp_max, temp_min, timezone
      } = weatherDetails;
 
      const weather = [
@@ -21,7 +22,7 @@ const WeatherDetails = ({ weatherDetails, iconCode }) => {
                     id: 1,
                     icon: UilTemperature,
                     element: 'Real feel',
-                    unit: `${feels_like}°`
+                    unit: feels_like ? `${feels_like.toFixed()}°` : ''
                },
                {
                     id: 2,
@@ -33,7 +34,7 @@ const WeatherDetails = ({ weatherDetails, iconCode }) => {
                     id: 3,
                     icon: UilWind,
                     element: 'Wind',
-                    unit: `${speed} km/h`
+                    unit: speed ? `${speed.toFixed()} km/h` : ''
                }
           ],
           [
@@ -41,37 +42,38 @@ const WeatherDetails = ({ weatherDetails, iconCode }) => {
                     id: 1,
                     icon: UilSun,
                     element: 'Rise',
-                    unit: `${sunrise} AM`
+                    unit: sunrise ? `${toLocalTime(sunrise, timezone, 'hh:mm a')}` : ''
                },
                {
                     id: 2,
                     icon: UilSunset,
                     element: 'Set',
-                    unit: `${sunset} AM`
+                    unit: sunset ? `${toLocalTime(sunset, timezone, 'hh:mm a')}` : ''
                },
                {
                     id: 3,
                     icon: UilArrowUp,
                     element: 'Hight',
-                    unit: `${temp_max}°`
+                    unit: temp_max ? `${temp_max.toFixed()}°` : ''
                },
                {
                     id: 4,
                     icon: UilArrowDown,
                     element: 'Low',
-                    unit: `${temp_min}°`
+                    unit: temp_min ? `${temp_min.toFixed()}°` : ''
                },
           ]
      ]
-
-     // console.log(iconCode(icon))
 
      return (
           <div>
                <p className='text-center my-4 text-cyan-200'>{ main }</p>
                <div className='flex justify-between items-center'>
-                    <img src={iconCode(icon)} alt='clear sky' />
-                    <h3 className='text-3xl font-medium'>{ temp }°</h3>
+                    <img
+                         src={iconCode(icon)}
+                         width='80'
+                         alt='clear sky' />
+                    <h3 className='text-3xl font-medium'>{temp ? temp.toFixed() : '' }°</h3>
                     <div className='grid gap-y-2'>
                          {weather[0].map(weather => {
                               return (
