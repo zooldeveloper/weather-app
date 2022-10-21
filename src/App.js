@@ -22,7 +22,7 @@ function App() {
                     timezone: formatToLocalTime(data.dt, data.timezone),
                     location: `${data.name}, ${data.country}`
                });
-               setWeather(data)
+               setWeather(data);
           }
           fetchWeatherData();
      }, [query, unit])
@@ -35,8 +35,18 @@ function App() {
           setQuery({ ...query, q: inputValue });
      }
 
+     const gradientBackground = () => {
+          const threshold = unit === 'metric' ? 20 : 68;
+          return weather.temp <= threshold ?
+               'from-cyan-700 to-blue-700' :
+               'from-yellow-700 to-orange-700';
+     }
+
      return (
-          <div className='mx-auto my-3 p-5 md:px-20 max-w-3xl h-auto bg-gradient-to-br from-cyan-700 to-blue-700 text-white flex flex-col'>
+          <div
+               className={`mx-auto my-3 p-5 md:px-20 max-w-3xl h-auto bg-gradient-to-br text-white flex flex-col 
+               ${gradientBackground()}`}
+          >
                <TopButtons handleStaticValue={handleStaticValue}/>
                <Inputs
                     handleInputValue={handleInputValue}
