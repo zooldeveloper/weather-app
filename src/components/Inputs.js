@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { UilSearch, UilMapMarker } from '@iconscout/react-unicons';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Inputs = ({ handleInputValue, setQuery, setUnit }) => {
 
@@ -7,9 +9,11 @@ const Inputs = ({ handleInputValue, setQuery, setUnit }) => {
 
      const handleCurrentLocation = () => {
           if (navigator.geolocation) {
+               toast.info("Fetching user's location");
                navigator.geolocation.getCurrentPosition((postion) => {
                     const lat = postion.coords.latitude;
                     const lon = postion.coords.longitude;
+                    toast.success("Successfully fetched user's location")
                     setQuery({lat, lon})
                })
           }
