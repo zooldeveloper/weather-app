@@ -13,7 +13,7 @@ const Inputs = ({ handleInputValue, setQuery, setUnit }) => {
                navigator.geolocation.getCurrentPosition((postion) => {
                     const lat = postion.coords.latitude;
                     const lon = postion.coords.longitude;
-                    toast.success("Successfully fetched user's location")
+                    setTimeout(() => toast.success("Successfully fetched user's location"), 2000)
                     setQuery({lat, lon})
                })
           }

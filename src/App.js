@@ -19,14 +19,14 @@ function App() {
      useEffect(() => {
           const fetchWeatherData = async () => {
                const message = query.q ? query.q : 'current location';
-               toast.info('Fetching data from ' + message )
+               query.q && toast.info('Fetching weather data from ' + message )
 
                const data = await getFormatedWeatherData({...query, units: unit });
                setTimeAndLocation({
                     timezone: formatToLocalTime(data.dt, data.timezone),
                     location: `${data.name}, ${data.country}`
                });
-               toast.success(`Successfully fetched data from ${data.name} ${data.country}`)
+               query.q && setTimeout(() => toast.success(`Successfully fetched data from ${data.name} ${data.country}`), 2000)
                setWeather(data);
           }
           fetchWeatherData();
@@ -76,7 +76,7 @@ function App() {
                />
                <ToastContainer
                     position="top-right"
-                    autoClose={5007}
+                    autoClose={4000}
                     theme={'colored'}
                     newestOnTop={true}
                />
