@@ -19,7 +19,7 @@ function App() {
      useEffect(() => {
           const fetchWeatherData = async () => {
                const message = query.q ? query.q : 'current location';
-               query.q && toast.info('Fetching weather data from ' + message )
+               query.q && toast.info('Fetching weather data from ' + message);
 
                const data = await getFormatedWeatherData({...query, units: unit });
                setTimeAndLocation({
@@ -41,7 +41,7 @@ function App() {
      }
 
      const gradientBackground = () => {
-          const threshold = unit === 'metric' ? 20 : 68;
+          const threshold = unit === 'metric' ? 25 : 77;
           return weather.temp <= threshold ?
                'from-cyan-700 to-blue-700' :
                'from-yellow-700 to-orange-700';
