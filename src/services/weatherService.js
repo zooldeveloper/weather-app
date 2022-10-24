@@ -1,14 +1,24 @@
 import { DateTime } from 'luxon';
+import axios from 'axios';
 
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-const API_KEY = process.env.REACT_APP_MY_API_KEY;
+const getWeatherData = async (serviceType, searchParams) => {
 
-const getWeatherData = (serviceType, searchParams) => {
-     const url = new URL(BASE_URL + '/' + serviceType);
-     url.search = new URLSearchParams({...searchParams, appid:API_KEY});
-     return fetch(url)
-          .then(res => res.json())
-          .then(data => data);
+     const options = {
+          method: 'GET',
+          url: 'http://localhost:8000',
+          params: [searchParams, { serviceType: serviceType }],
+          Headers: {
+               'Content-Type': 'application/json'
+          }
+     }
+
+     let data;
+
+     await axios.request(options)
+          .then(response => data = response.data)
+          .catch(error => console.log(error));
+     
+     return data
 }
 
 const formatCurrentWeather = (data) => {
@@ -48,9 +58,10 @@ const fomatForecastWeather = (data) => {
 
 
 const getFormatedWeatherData = async (searchParams) => {
+     
      const formattedCurrentWeather = await getWeatherData
      ('weather', searchParams).then(data => formatCurrentWeather(data));
-
+ 
      const { lon, lat } = formattedCurrentWeather;
 
      const formattedForecastWeather = await getWeatherData
