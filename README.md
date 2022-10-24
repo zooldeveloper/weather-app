@@ -12,7 +12,11 @@ Once the repo is cloned, make sure to create the `.env` file in the root of your
 
 Instals all dependencies needed for the project. 
 
-### `npm start`
+### `npm run start:backend`
+
+Runs the mini-backend server on localhost with the default port 8000 and it should print to the console `Server is running on port 8000`. If the server runs on another port for any reason, this is printed to the console, e.g. `Server is running on port 3001`.
+
+### `npm run start:frontend`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
