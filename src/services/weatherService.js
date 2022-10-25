@@ -5,7 +5,7 @@ const getWeatherData = async (serviceType, searchParams) => {
 
      const options = {
           method: 'GET',
-          url: 'http://localhost:8000',
+          url: `${window.location.origin}/getWeather`,
           params: [searchParams, { serviceType: serviceType }],
           Headers: {
                'Content-Type': 'application/json'
