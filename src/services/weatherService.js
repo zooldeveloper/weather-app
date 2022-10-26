@@ -2,10 +2,13 @@ import { DateTime } from 'luxon';
 import axios from 'axios';
 
 const getWeatherData = async (serviceType, searchParams) => {
-
+     
+     const location = window.location;
+     const url = location.hostname === 'localhost' ? `${location.protocol}//${location.hostname}:8000/getWeather` : `${location.origin}/getWeather`
+     
      const options = {
           method: 'GET',
-          url: `${window.location.origin}/getWeather`,
+          url: url,
           params: [searchParams, { serviceType: serviceType }],
           Headers: {
                'Content-Type': 'application/json'

@@ -8,16 +8,28 @@ const Inputs = ({ handleInputValue, setQuery, setUnit }) => {
      const [inputValue, setInputValue] = useState('');
 
      const handleCurrentLocation = () => {
+
           if (navigator.geolocation) {
-               toast.info("Fetching user's location");
-               navigator.geolocation.getCurrentPosition((postion) => {
-                    const lat = postion.coords.latitude;
-                    const lon = postion.coords.longitude;
-                    setTimeout(() => toast.success("Successfully fetched user's location"), 2000)
-                    setQuery({lat, lon})
-               })
+               navigator.permissions.query({ name: 'geolocation' }).then(response => {
+                    if (response.state === 'granted' || response.state === 'prompt') {
+                         toast.info("Fetching user's location");
+                         navigator.geolocation.getCurrentPosition(postion => {
+                              const lat = postion.coords.latitude;
+                              const lon = postion.coords.longitude;
+                              setTimeout(() => toast.success("Successfully fetched user's location"), 2000)
+                              setQuery({ lat, lon })
+                         });
+
+                    } else if (response.state === 'denied') {
+                         toast.warn("Geolocation is not allowed by this browser");
+                    }
+               });
+          } else {
+               toast.warn("Geolocation is not supported by this browser");
           }
      }
+
+
 
      const handleUnits = (e) => {
           setUnit(e.target.name);
@@ -58,7 +70,7 @@ const Inputs = ({ handleInputValue, setQuery, setUnit }) => {
                          </button>
                     </div>
                </div>
-          </div> 
+          </div>
      )
 }
 
