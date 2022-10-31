@@ -1,6 +1,6 @@
 # React Weather App 🌦 ❄️
 
-It's a weather app that was built using react, tailwind, and the openweathermap api service. The app allows you to display the hourly and daily forecasts and the current weather by selecting one of the predefined cities or by entering the name of any city of your choice, or even by selecting your current location, which depends on the latitude and longitude coordinates. You also have the ability to toggle between Celsius and Fahrenheit units.
+It's a weather app that was built using React, Tailwind, and the Openweathermap api service. The app allows you to display the hourly and daily forecasts and the current weather by selecting one of the predefined cities or by entering the name of any city of your choice, or even by selecting your current location, which depends on the latitude and longitude coordinates. You also have the ability to toggle between Celsius and Fahrenheit units.
 
 ## Usage
 
